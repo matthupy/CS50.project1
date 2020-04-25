@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block app_content %}
+<div class="container">
+    <h1>results</h1>
+    <h6><a href="{{ url_for('index') }}">&larr; new search</a></h6>
+</div>
+
+<br>
+{% if books|length > 0 %}
+<table id="search-results">
+    <tr>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Year</th>
+    </tr>
+    {% for book in books %}
+    <tr>
+        <td class="col-center"><a href="{{ url_for('book', isbn=book.isbn) }}">{{ book.isbn }}</a></td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td class="col-center">{{ book.year }}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <td>No books found!</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h3>No books found!</h3>
+{% endif %}
+{% endblock %}

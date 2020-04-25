@@ -1,0 +1,76 @@
+body {
+    background-color: rgb(201, 216, 221);
+}
+
+span {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+table {
+    border: 2px solid black;
+
+
+    th {
+        background-color: gray;
+        border: 1px solid black;
+        padding: 3px;
+    }
+
+    td {
+        border: 1px solid lightgray;
+        border: 3px;
+    }
+}
+
+h1 {
+    padding-top: 10px;
+}
+
+textarea {
+    width: 100%
+}
+
+.col-center {
+    text-align: center;
+}
+
+.form-control {
+    padding: 5px;
+    margin: 5px;
+}
+
+button,
+.btn {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.book-header {
+    font-weight: bold;
+}
+
+.alert {
+    margin-top: 2%;
+}
+
+#book-rating {
+    max-width: 40%;
+}
+
+.centered-block {
+    text-align: center;
+    margin: 40%;
+    padding: 15px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#search-results {
+    margin-bottom: 3%;
+}
+
+.card {
+    padding: 15px;
+
+}

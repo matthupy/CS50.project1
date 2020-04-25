@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block app_content %}
+<div class="container">
+    <h1>search</h1>
+    <p>use any combination of the search criteria below</p>
+</div>
+
+<br>
+
+<div id="search-block" class="container card">
+    <form action="{{ url_for('search_results') }}" method="POST">
+        <div class="form-group">
+            <input class="form-control" name="isbn" placeholder="ISBN">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="title" placeholder="Title">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="author" placeholder="Author">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="year" placeholder="Year Published">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary">Search</button>
+            <button type="reset" class="btn btn-primary">Clear</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Book Details
+{% endblock %}
+
+{% block app_content %}
+{% if book|length > 0 %}
+<div class="container">
+    <h1>details</h1>
+</div>
+
+
+<br>
+
+<div class="container card">
+    <table>
+        <tr>
+            <td class="book-header">ISBN</td>
+            <td>{{ book.isbn }}</td>
+        </tr>
+        <tr>
+            <td class="book-header">Title</td>
+            <td>{{ book.title }}</td>
+        </tr>
+        <tr>
+            <td class="book-header">Author</td>
+            <td>{{ book.author }}</td>
+        </tr>
+        <tr>
+            <td class="book-header">Year Published</td>
+            <td>{{ book.year }}</td>
+        </tr>
+        <tr>
+            <td class="book-header">GoodReads Reviews</td>
+            <td>{{ reviews_count }}</td>
+        </tr>
+        <tr>
+            <td class="book-header">Avg. GoodReads Rating</td>
+            <td>{{ average_rating }}</td>
+        </tr>
+    </table>
+</div>
+
+
+<br>
+
+<div class="container card">
+    <h4>Add a review:</h4>
+    <form action="{{ url_for('book_review_submit', isbn=book.isbn) }}" method="POST">
+        <div class="rating form-group">
+            <input id="book-rating" size=10 class="form-control" name="rating" placeholder="Rating (1-5)">
+        </div>
+        <div class="form-group">
+            <textarea rows="5" cols="60" name="review-text" placeholder="Enter review here..."></textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-primary">Clear</button>
+        </div>
+    </form>
+</div>
+
+
+<br>
+
+<div class="container card">
+<h4>Reviews:</h4>
+
+{% for review in reviews %}
+<div class="container card">
+    <h6>{{ review.username }} - {{ review.rating }}</h6>
+    <p>{{ review.review_text }}</p>
+</div>
+<br>
+
+{% else %}
+<p>Be the first to add a review!</p>
+
+{% endfor %}
+
+{% else %}
+<h1>Error: Please select a book!</h1>
+{% endif %}
+{% endblock %}
+
+</div>

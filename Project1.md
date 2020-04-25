@@ -1,6 +1,10 @@
 # Project Definition
 https://docs.cs50.net/web/2020/x/projects/1/project1.html
 
+## GoodReads
+key: Y1JjJVXjS3RRo5tGbrnOjQ
+secret: uS0SJSp6wm3fQiXZ9XmPXlFjKTOkna1mvXYFWwUQ64U
+
 # Objectives
 
 * Become more comfortable with Python

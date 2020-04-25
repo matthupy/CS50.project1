@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Book Reviews - Login
+{% endblock %}
+
+{% block app_content %}
+<div class="container col-6 align-self-center">
+    <div class="centered-block card">
+        <form action="{{ url_for('create_account') }}" method="POST">
+                <input class="form-control" type="text" placeholder="username" name="username" value="{{ request.form.username }}">
+                <input class="form-control" type="password" placeholder="password" name="password" value="{{ request.form.password }}">
+                <input class="form-control" type="password" placeholder="confirm password" name="password2" value="{{ request.form.passord }}">
+            <br>
+            <input type="submit" class="btn btn-primary" value="Create Account">
+        </form>
+    
+        {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
