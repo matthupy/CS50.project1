@@ -117,9 +117,8 @@ def search_results():
     sOrderBy = " order by title "
 
     if len(filters) > 0:
-        sSQL = sSQL + " where " + sWhere + sOrderBy
-
-    print(f"Executing SQL \r\n {sSQL} \r\n Values \r\n isbn={isbn} \r\n title={title} \r\n author={author} \r\n year={year}")
+        sSQL = sSQL + " where " + sWhere
+    sSQL += sOrderBy
 
     # Execute the query
     books = db.execute(
@@ -180,7 +179,6 @@ def book_review_submit(isbn):
 
     # Users should only be able to submit one review per book
     sSQL = f"select * from reviews where isbn = '{isbn}' and username = '{flask_login.current_user.id}'"
-    print(f"executing SQL: \r\n {sSQL}")
     review = db.execute(sSQL).fetchone()
     # review = db.execute(sSQL, {"isbn":isbn, "username":flask_login.current_user.id})
 
@@ -250,7 +248,6 @@ def login():
             user = User()
             user.id = username
             flask_login.login_user(user)
-            print("logged in with Flask")
             return redirect(url_for("index"))
 
     return render_template("login.html", error=error, user=None)
@@ -338,8 +335,6 @@ def book_api(isbn):
             "review_text": review.review_text,
             "timestamp": review.update_date,
         }
-
-    print(reviews_json)
 
     return jsonify(
         {
