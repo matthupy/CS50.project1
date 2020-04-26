@@ -95,11 +95,14 @@ def search_results():
 
     # Create filters
     if (isbn is not None) and (len(isbn) != 0):
+        isbn = f"%{isbn}%"
         filters.append(f"isbn like :isbn")
     if (title is not None) and (len(title) != 0):
+        title = f"%{title}%"
         filters.append(f"upper(title) like upper(:title)")
     if (author is not None) and (len(author) != 0):
-        filters.append(f"upper(author) like upper(\'%{author}%\')")
+        author = f"%{author}%"
+        filters.append(f"upper(author) like upper(:author)")
     if (year is not None) and (len(year) != 0):
         try:
             year = int(year)
@@ -112,10 +115,9 @@ def search_results():
     sSQL = "select * from books "
     sWhere = separator.join(filters)
     sOrderBy = " order by title "
-    sLimit = " limit 100 "
 
     if len(filters) > 0:
-        sSQL = sSQL + " where " + sWhere + sOrderBy + sLimit
+        sSQL = sSQL + " where " + sWhere + sOrderBy
 
     print(f"Executing SQL \r\n {sSQL} \r\n Values \r\n isbn={isbn} \r\n title={title} \r\n author={author} \r\n year={year}")
 
@@ -348,6 +350,7 @@ def book_api(isbn):
             "goodreads_reviews": res["books"][0]["reviews_count"],
             "goodreads_rating": res["books"][0]["average_rating"],
             "reviews": reviews_json,
+            "cover": f"http://covers.openlibrary.org/b/isbn/{isbn}-M.jpg"
         }
     )
 
