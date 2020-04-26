@@ -10,49 +10,55 @@ Book Details
     <h1>details</h1>
 </div>
 
-
-<br>
-
-<div class="container card">
-    <table>
-        <tr>
-            <td class="book-header">ISBN</td>
-            <td>{{ book.isbn }}</td>
-        </tr>
-        <tr>
-            <td class="book-header">Title</td>
-            <td>{{ book.title }}</td>
-        </tr>
-        <tr>
-            <td class="book-header">Author</td>
-            <td>{{ book.author }}</td>
-        </tr>
-        <tr>
-            <td class="book-header">Year Published</td>
-            <td>{{ book.year }}</td>
-        </tr>
-        <tr>
-            <td class="book-header">GoodReads Reviews</td>
-            <td>{{ reviews_count }}</td>
-        </tr>
-        <tr>
-            <td class="book-header">Avg. GoodReads Rating</td>
-            <td>{{ average_rating }}</td>
-        </tr>
-    </table>
+<div class="row">
+    <div class="container col-lg-3 col-md-12 col-sm-12 cover-image">
+        <img src="http://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg" alt="Book Cover">
+    </div>
+    <div class="container card col-lg-9 col-md-12 col-sm-12">
+        <table>
+            <tr>
+                <td class="book-header">ISBN</td>
+                <td>{{ book.isbn }}</td>
+            </tr>
+            <tr>
+                <td class="book-header">Title</td>
+                <td>{{ book.title }}</td>
+            </tr>
+            <tr>
+                <td class="book-header">Author</td>
+                <td>{{ book.author }}</td>
+            </tr>
+            <tr>
+                <td class="book-header">Year Published</td>
+                <td>{{ book.year }}</td>
+            </tr>
+            <tr>
+                <td class="book-header">GoodReads Reviews</td>
+                <td>{{ reviews_count }}</td>
+            </tr>
+            <tr>
+                <td class="book-header">Avg. GoodReads Rating</td>
+                <td>{{ average_rating }}</td>
+            </tr>
+            <tr>
+                <td class="book-header">Cover URL</td>
+                <td><a href="http://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg">http://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg</a></td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 
 <br>
 
 <div class="container card">
-    <h4>Add a review:</h4>
+    <h4>add a review</h4>
     <form action="{{ url_for('book_review_submit', isbn=book.isbn) }}" method="POST">
         <div class="rating form-group">
-            <input id="book-rating" size=10 class="form-control" name="rating" placeholder="Rating (1-5)">
+            <input id="book-rating" size=10 class="form-control" name="rating" placeholder="rating (1-5)">
         </div>
         <div class="form-group">
-            <textarea rows="5" cols="60" name="review-text" placeholder="Enter review here..."></textarea>
+            <textarea rows="5" cols="60" name="review-text" placeholder="enter review here..."></textarea>
         </div>
         <div class="form-group">
             <button class="btn btn-primary">Submit</button>
@@ -65,23 +71,23 @@ Book Details
 <br>
 
 <div class="container card">
-<h4>Reviews:</h4>
+    <h4>reviews</h4>
 
-{% for review in reviews %}
-<div class="container card">
-    <h6>{{ review.username }} - {{ review.rating }}</h6>
-    <p>{{ review.review_text }}</p>
-</div>
-<br>
+    {% for review in reviews %}
+    <div class="container card">
+        <h6>{{ review.username }} - {{ review.rating }}</h6>
+        <p>{{ review.review_text }}</p>
+    </div>
+    <br>
 
-{% else %}
-<p>Be the first to add a review!</p>
+    {% else %}
+    <p>be the first to add a review!</p>
 
-{% endfor %}
+    {% endfor %}
 
-{% else %}
-<h1>Error: Please select a book!</h1>
-{% endif %}
-{% endblock %}
+    {% else %}
+    <h1>Error: Please select a book!</h1>
+    {% endif %}
+    {% endblock %}
 
 </div>
