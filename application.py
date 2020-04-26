@@ -89,8 +89,6 @@ def search_results():
     author = request.form.get("author")
     year = request.form.get("year")
 
-
-
     # Initialize filter list
     filters = []
     separator = " AND "
@@ -99,9 +97,9 @@ def search_results():
     if (isbn is not None) and (len(isbn) != 0):
         filters.append(f"isbn like :isbn")
     if (title is not None) and (len(title) != 0):
-        filters.append(f"title like :title")
+        filters.append(f"upper(title) like upper(:title)")
     if (author is not None) and (len(author) != 0):
-        filters.append(f"author like :author")
+        filters.append(f"upper(author) like upper(\'%{author}%\')")
     if (year is not None) and (len(year) != 0):
         try:
             year = int(year)
@@ -118,6 +116,8 @@ def search_results():
 
     if len(filters) > 0:
         sSQL = sSQL + " where " + sWhere + sOrderBy + sLimit
+
+    print(f"Executing SQL \r\n {sSQL} \r\n Values \r\n isbn={isbn} \r\n title={title} \r\n author={author} \r\n year={year}")
 
     # Execute the query
     books = db.execute(
